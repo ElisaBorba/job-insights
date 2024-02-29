@@ -14,7 +14,8 @@ class ProcessJobs:
                 self.jobs_list.append(row)
 
     def get_unique_job_types(self) -> List[str]:
-        pass
+        job_type_list = [item["job_type"] for item in self.jobs_list]
+        return job_type_list
 
     def filter_by_multiple_criteria(self) -> List[dict]:
         pass
@@ -22,6 +23,6 @@ class ProcessJobs:
 
 merda = ProcessJobs()
 test = merda.read("data/jobs.csv")
-lista = merda.jobs_list
+lista = merda.get_unique_job_types()
 
 print("TESTAAA", lista)
