@@ -1,6 +1,10 @@
-# from src.pre_built.counter import count_ocurrences
+from src.pre_built.counter import count_ocurrences
 
 
-# req 1
 def test_counter():
-    raise
+
+    path = "tests/mocks/mock_counter.csv"
+    word = "python"
+    expected = 7
+
+    assert count_ocurrences(path, word) == expected
