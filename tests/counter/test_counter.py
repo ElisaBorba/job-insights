@@ -7,4 +7,5 @@ def test_counter():
     word = "python"
     expected = 7
 
-    assert count_ocurrences(path, word) == expected
+    result = count_ocurrences(path, word)
+    assert result == expected
