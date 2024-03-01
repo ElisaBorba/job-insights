@@ -30,17 +30,3 @@ class ProcessJobs:
                 filtered_jobs.append(job)
 
         return filtered_jobs
-
-
-merda = ProcessJobs()
-test = merda.read("data/jobs.csv")
-jobs = [
-    {"id": 1, "industry": "IT", "job_type": "FULL_TIME"},
-    {"id": 2, "industry": "Healthcare", "job_type": "PART_TIME"},
-    {"id": 3, "industry": "IT", "job_type": "FULL_TIME"},
-]
-
-lista = merda.filter_by_multiple_criteria(
-    jobs, {"industry": "IT", "job_type": "FULL_TIME"}
-)
-print("LISTA", lista)
