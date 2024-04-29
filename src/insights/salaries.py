@@ -1,4 +1,5 @@
 from typing import Union, List, Dict
+
 from src.insights.jobs import ProcessJobs
 from numbers import Real
 
@@ -37,8 +38,9 @@ class ProcessSalaries(ProcessJobs):
             or job["max_salary"] == ""
             or salary is None
             or salary == ""
+            or isinstance(salary, (list, dict))
         ):
-            raise ValueError("salaries's values cannot be empty!")
+            raise ValueError("salaries's values cannot be empty or invalid!")
 
         if not isinstance(job["max_salary"], Real) or not isinstance(
             job["min_salary"], Real
@@ -57,13 +59,32 @@ class ProcessSalaries(ProcessJobs):
     def filter_by_salary_range(
         self, jobs: List[dict], salary: Union[str, int]
     ) -> List[Dict]:
-        pass
+        filtered_jobs = []
+        for job in jobs:
+            try:
+                if self.matches_salary_range(job, salary):
+                    filtered_jobs.append(job)
+            except ValueError:
+                print("error")
+        return filtered_jobs
 
 
 # instancia = ProcessSalaries()
 # instancia.read("data/jobs.csv")
 
 # lista = instancia.jobs_list
-# teste = instancia.matches_salary_range({"min_salary": 600}, 700)
+# teste = instancia.matches_salary_range(
+#     {"max_salary": 10000, "min_salary": 200}, 700
+# )
+# jobs = [
+#     {"max_salary": 0, "min_salary": 10},
+#     {"max_salary": 10, "min_salary": 100},
+#     {"max_salary": 10000, "min_salary": 200},
+#     {"max_salary": 15000, "min_salary": 0},
+#     {"max_salary": 1500, "min_salary": 0},
+#     {"max_salary": -1, "min_salary": 10},
+# ]
+# teste_filter = instancia.filter_by_salary_range(jobs, 700)
 
-# print("PRETENSÃO", teste)
+# print("testeee", teste)
+# print("FILTER", teste_filter)
